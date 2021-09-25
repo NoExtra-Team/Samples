@@ -1,0 +1,47 @@
+' SNDH Replayer for GFA
+' Original by Swe/YesCrew
+' Modified version by gwEm
+' Fixed version by Zorro2^NoExtra
+'
+OPTION BASE 0
+'
+' ************************
+' Loading stuff          *
+' sndhplay% : PLAYER     *
+' sndhtune% : SNDH MUSIC *
+' ************************
+path$="C:\MYM_V161\SOURCE\GFA\"
+INLINE sndhplay%,314
+INLINE sndhtune%,18906
+BLOAD path$+"GWEMSNDH.PRG",sndhplay%
+BLOAD path$+"ROLLOUT.SND",sndhtune%
+'
+' *******************************
+' MOVEM.L D0-D7/A0-A6,(SP)+     *
+DIM r%(16)
+' *******************************
+' Address of the music in A6    *
+r%(14)=sndhtune%
+' Frequency to replay in D7     *
+r%(7)=50
+' Number of music to play in D6 *
+r%(6)=1
+' *******************************
+' Start to play music
+super%=GEMDOS(&H20,L:0)
+RCALL sndhplay%+28,r%()
+~GEMDOS(&H20,L:super%)
+'
+TEXT 0,10,"CLICK ON MOUSE LEFT BUTTON TO QUIT..."
+DO
+  EXIT IF MOUSEK=1
+LOOP
+'
+CLS
+' Stop to play music
+super%=GEMDOS(&H20,L:0)
+RCALL sndhplay%+28+4,r%()
+~GEMDOS(&H20,L:super%)
+'
+EDIT
+'
