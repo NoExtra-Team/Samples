@@ -1,4 +1,5 @@
 ' SNDH Replayer for GFA
+' Under TIMER C
 ' Original by Swe/YesCrew
 ' Modified version by gwEm
 ' Fixed version by Zorro2^NoExtra
@@ -10,9 +11,9 @@ OPTION BASE 0
 ' sndhplay% : PLAYER     *
 ' sndhtune% : SNDH MUSIC *
 ' ************************
-path$="C:\MYM_V161\SOURCE\GFA\"
-INLINE sndhplay%,314
+INLINE sndhplay%,312
 INLINE sndhtune%,18906
+path$="\MYM_V161\SOURCE\GFA\"
 BLOAD path$+"GWEMSNDH.PRG",sndhplay%
 BLOAD path$+"ROLLOUT.SND",sndhtune%
 '

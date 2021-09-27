@@ -1,0 +1,58 @@
+' SNDH Replayer for GFA
+' Under interruptions - Vbl $4D2.w
+' Original by Frans van Nispen
+' Modified version by Zorro2^NoExtra
+'
+DIM r%(16) ! Reserve for Assembler registers at an RCALL ()
+' Loading *.SND music file
+FILESELECT "\MYM_V161\SOURCE\GFA\*.SND","",nom$
+@charge_music(nom$)
+@music_on
+PRINT "Hit keyboard space to quit..."
+~INP(2)
+@music_off
+'
+EDIT
+'
+' ****************
+' * RePlay music *
+' ****************
+PROCEDURE music_on
+  SPOKE &H484,2              ! no more keyboard clic
+  oldstack%=GEMDOS(32,L:0)   ! go to SUPERVISOR MODE
+  r%(0)=1                    ! D0=1  (1=position of music to play)
+  RCALL xlr8%+0,r%()         ! Init Music
+  '
+  ' Position play allows you to start at any songposition in a file, this way
+  ' you could make more than one songs in one file
+  '
+  LPOKE &H4D2,xlr8%+8        ! Put player in VBL $4d2.w
+  '
+  ~GEMDOS(32,L:oldstack%)    ! Supervisor MODE
+RETURN
+'
+' ****************
+' * Stop   music *
+' ****************
+PROCEDURE music_off
+  oldstack%=GEMDOS(32,L:0)   ! go to SUPERVISOR MODE
+  RCALL xlr8%+4,r%()         ! Stop Music
+  LPOKE &H4D2,0              ! clear VBL Routine
+  ~GEMDOS(32,L:oldstack%)    ! User MODE
+  SPOKE &H484,15             ! Keyboard sound
+  ~MFREE(xlr8%)              ! Free memory
+  RESERVE                    ! Free the whole memory allocated
+RETURN
+'
+' ****************
+' * charge music *
+' ****************
+PROCEDURE charge_music(file$)
+  OPEN "i",#1,file$          ! Open a file
+  len%=LOF(#1)               ! Size required
+  RESERVE FRE(0)-len%        ! Allocation of memories
+  xlr8%=MALLOC(len%)         ! Re-Player memory allocated
+  BGET #1,xlr8%,len%         ! Load the file
+  CLOSE #1                   ! Close the file
+RETURN
+'

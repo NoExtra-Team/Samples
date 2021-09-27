@@ -26,9 +26,10 @@ start   lea     sndhpoi(pc),a1          ;
         move.w  d7,(a1)+                ; gfa register 7  = replay freq
         move.b  $484.w,(a1)+            ;
         clr.b   $484.w                  ; keyclick off
-        move.l  #$08000000,$ffff8800.w  ; die
-        move.l  #$09000000,$ffff8800.w  ; die
-        move.l  #$0A000000,$ffff8800.w  ; die ;)
+        lea     $ffff8800.w,a0          ; Cut sound
+        move.l  #$8000000,(a0)          ; Voice A
+        move.l  #$9000000,(a0)          ; Voice B
+        move.l  #$a000000,(a0)          ; Voice C
         move.w  d6,d0                   ; gfa register 6  = number of music to play
         move.l  sndhpoi(pc),a0          ;
         jsr     (a0)                    ; sndh init
