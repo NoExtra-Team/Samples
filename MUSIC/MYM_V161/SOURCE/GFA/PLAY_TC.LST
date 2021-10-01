@@ -6,16 +6,16 @@
 '
 OPTION BASE 0
 '
-' ************************
-' Loading stuff          *
-' sndhplay% : PLAYER     *
-' sndhtune% : SNDH MUSIC *
-' ************************
+' ***********************************
+' Loading stuff                     *
+' sndhplay% : PLAYER                *
+' sndhtune% : SNDH music uncompress *
+' ***********************************
 INLINE sndhplay%,312
 INLINE sndhtune%,18906
 path$="\MYM_V161\SOURCE\GFA\"
-BLOAD path$+"GWEMSNDH.PRG",sndhplay%
-BLOAD path$+"ROLLOUT.SND",sndhtune%
+BLOAD path$+"PLAYER.ASM\GWEMSNDH.PRG",sndhplay%
+BLOAD path$+"MUS\ROLLOUT.SND",sndhtune%
 '
 ' *******************************
 ' MOVEM.L D0-D7/A0-A6,(SP)+     *
