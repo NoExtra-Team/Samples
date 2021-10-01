@@ -66,7 +66,8 @@ m_loop  cmp.b   #$39,$fffffc02.w        ; SPACE key pressed ?
 
 display:dc.b    "Press space key to quit..."
         dc.b    13,10,0
-MUSIC:  incbin  TEST_STE.SND            ; uncompress SNDH file to include (this one needs 50Hz replay)
+; uncompress SNDH file to include (this one needs 50Hz replay)
+MUSIC:  incbin  "\MYM_V161\SOURCE\ASM\MUS\TEST_STE.SND"
         even
 
         SECTION BSS

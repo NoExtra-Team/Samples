@@ -98,7 +98,7 @@ depack: dc.b    "Depack music file, please wait!"
         dc.b    13,10,0
 display:dc.b    "Press space key to quit..."
         dc.b    13,10,0
-FILE:   incbin  PACK_STE.SND            ; ICE compress SNDH file
+FILE:   incbin  "\MYM_V161\SOURCE\ASM\MUS\PACK_STE.SND" ; ICE compress SNDH file
         even
 
         SECTION BSS

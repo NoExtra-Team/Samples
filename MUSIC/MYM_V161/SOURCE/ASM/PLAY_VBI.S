@@ -75,7 +75,8 @@ vbl:    jsr     MUSIC+8                 ; call music
 display:dc.b    "Press a key to quit..."
         dc.b    13,10,0
         even
-MUSIC:  incbin  TEST_STE.SND            ; uncompress SNDH file to include (this one needs 50Hz replay)
+; uncompress SNDH file to include (this one needs 50Hz replay)
+MUSIC:  incbin  "\MYM_V161\SOURCE\ASM\MUS\TEST_STE.SND"
         even
 
         SECTION BSS

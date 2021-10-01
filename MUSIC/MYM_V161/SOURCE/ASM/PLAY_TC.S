@@ -83,7 +83,8 @@ timer_c sub.w   #R_FREQ,tccount         ; you can use any replay rate here less 
 
 display:dc.b    "Press a key to quit..."
         dc.b    13,10,0
-MUSIC:  incbin  MULTSNDH.SND            ; SNDH file with two musics, non ice packed
+; uncompress SNDH file to include (this one needs 50Hz replay)
+MUSIC:  incbin  "\MYM_V161\SOURCE\ASM\MUS\MULTSNDH.SND"
         even
 
         SECTION BSS
