@@ -1,6 +1,7 @@
 ;
 ;       VBL replayer for unpacked SNDH files
 ;       Special example for Tobe and Gloky/MJJ
+;       Fixed by Zorro2^NoExtra
 ;
 ;       Depending on your tune - all timers now free ;)
 ;
@@ -66,7 +67,9 @@
         move.w  #$4c,-(sp)              ;
         trap    #1                      ;
 
-vbl:    jsr     MUSIC+8                 ; call music
+vbl:    movem.l	a0-a6/d0-d7,-(sp)       ; save registers
+        jsr     MUSIC+8                 ; call music
+        movem.l	(sp)+,a0-a6/d0-d7       ; restore registers
         move.l  oldvbl,-(sp)            ; go to old vector (system friendly ;) )
         rts
 
