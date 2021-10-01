@@ -1,7 +1,7 @@
-# Replayer of a SNDH file with musics
+# Replayer of SNDH file with musics
 
 ![Image text](https://github.com/NoExtra-Team/Samples/blob/master/MUSIC/MYM_V161/SOURCE/GFA/PLAY_TC.png)<br>
-##PLAY_TC.LST
+## PLAY_TC.LST
 Play sndh music with Timer C
 - add path to load files
 - bload inline buffers
@@ -9,7 +9,7 @@ Play sndh music with Timer C
 - add sentence to quit program
 - add comments
 
-##GWEMSNDH.S
+## GWEMSNDH.S
 SNDH Replayer under interrupts with TIMER C
 - add compilation options
 - put sections
@@ -18,7 +18,7 @@ SNDH Replayer under interrupts with TIMER C
 - add comments
 
 ![Image text](https://github.com/NoExtra-Team/Samples/blob/master/MUSIC/MYM_V161/SOURCE/GFA/PLAY_VBL.png)<br>
-##PLAY_VBL.LST
+## PLAY_VBL.LST
 SNDH Replayer under interrupts with Vbl $4D2.w
 - load a SNDH file
 - play the music without asm routs
