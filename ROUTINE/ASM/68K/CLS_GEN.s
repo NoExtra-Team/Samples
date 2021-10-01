@@ -6,15 +6,15 @@
 ; Parameters                                                              *
 ; ------------------------------------------------------------------------*
 ;	a0 : address destination                                                *
-;	d0 : filler / 0 by default                                              *
-; call : jsr Code_generate                                                *
+; ------------------------------------------------------------------------*
+; call : Code_generate with d0 register to 0 (filler)                     *
 ; *************************************************************************
 NB_LIGNE_GENERE equ	200-1 ; Width, number of line                         *
 NB_BLOC_SUPP    equ	20-1  ; Height, calculate as 20 x 16 blocs by line    *
 PLAN_CLS        equ	0     ; Bitplane, which bitplane to clear             *
 ; *************************************************************************
 
-Genere_code:
+Generate_code:
 	lea Code_gen,a0
 	move.w	#NB_LIGNE_GENERE,d7               ; Nombre de lignes
 	moveq	#0,d4
@@ -34,9 +34,8 @@ Genere_une_ligne:
 
 Code_generate:
 	ds.w	(2*NB_BLOC_SUPP)*NB_LIGNE_GENERE		; Place pour le code genere
-									   									      ; pour l'effacement de l'elt 3d
+									   									      ; pour l'effacement de l'element
 	ds.w	1                                   ; Place pour le rts
 rien:
 	ds.b	10000                               ; Au cas ou ??
 	even
-	
