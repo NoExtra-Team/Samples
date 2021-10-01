@@ -1,6 +1,6 @@
 # Replayer of a SNDH file with musics
 
-<img src="https://github.com/NoExtra-Team/Samples/blob/master/MUSIC/MYM_V161/SOURCE/S/PLAY_VBL.png" width="200" height="100"/><br>
+<img src="https://github.com/NoExtra-Team/Samples/blob/master/MUSIC/MYM_V161/SOURCE/ASM/PLAY_VBL.png" width="200" height="100"/><br>
 ## PLAY_TC.S
 Play music with TIMER C
 - put sections
@@ -22,7 +22,7 @@ Play music with VBL $70.w
 ## PLAY_INT.S (new routine!)
 Play music under one of seven VBL as $4D2
 
-<img src="https://github.com/NoExtra-Team/Samples/blob/master/MUSIC/MYM_V161/SOURCE/S/NewDepack.png" width="200" height="100"/><br>
+<img src="https://github.com/NoExtra-Team/Samples/blob/master/MUSIC/MYM_V161/SOURCE/ASM/NewDepack.png" width="200" height="100"/><br>
 ## PLAY_ICE.S (new routine!)
 Decompact routine to Play music under Interruptions
 
