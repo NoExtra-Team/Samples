@@ -13,14 +13,17 @@ Perform an erase part of the screen according with bitplanes selected
 ## LAUNCHER.ASM
 Perform an erase part of the screen according with bitplanes selected
 
+## OLDSUPER.ASM
+Launch a program from ST or FALCON
+
 ## PROTECT.ASM
-Clean a screen 320x200 in one bitplane
+Protected mode from errors
 
 ## SAVE_TO.ASM
-Clean a screen 320x200 in four bitplanes
+Save data to a binary file
 
 ## SRC_COPY.ASM
-Clean a screen 320x200 for each bitplanes
+Copy 32k datas
 
 ## core.S
 How to use PROTECT.ASM, CLR4PBF.ASM & SPRITE.ASM with a Degas Picture as binary
