@@ -55,7 +55,7 @@ f_close:
 handle:	;	handle of the file
 	dc.w	0
 data:	;	Path and name of the file to save
-	dc.b	"C:\DATA.DAT",0
+	dc.b	"\DATA.DAT",0
 	even
 
 ********************

@@ -1,13 +1,13 @@
 ; *************************************************************************
-; ***                CLEAR a screen in one bitplane                     ***
+; ***            CLEAR a part of screen in one bitplane                 ***
 ; *************************************************************************
-; ***               Zorro 2/NoExtra and GT Turbo/CVS                    ***
+; ***               GT Turbo/CVS and Zorro 2/NoExtra                    ***
 ; *************************************************************************
 ; Parameters                                                              *
 ; ------------------------------------------------------------------------*
-;	a0 : address destination                                                *
+;	a0.l : destination address                                              *
 ; ------------------------------------------------------------------------*
-; call : Code_generate with d0 register to 0 (filler)                     *
+; call : Code_generate with d0.w register to 0 (filler)                   *
 ; *************************************************************************
 NB_LIGNE_GENERE equ	200-1 ; Width, number of line                         *
 NB_BLOC_SUPP    equ	20-1  ; Height, calculate as 20 x 16 blocs by line    *
@@ -15,7 +15,7 @@ PLAN_CLS        equ	0     ; Bitplane, which bitplane to clear             *
 ; *************************************************************************
 
 Generate_code:
-	lea Code_gen,a0
+	lea Code_generate,a0
 	move.w	#NB_LIGNE_GENERE,d7               ; Nombre de lignes
 	moveq	#0,d4
 Genere_pour_toutes_les_lignes:	
