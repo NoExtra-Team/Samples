@@ -1,0 +1,1 @@
+# -GFA BASIC- Tricks or routs for Atari ST coding
