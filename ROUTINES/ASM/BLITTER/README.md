@@ -1,6 +1,6 @@
 # Tricks or routs for Atari ST coding
 
-<img src="https://github.com/NoExtra-Team/Samples/blob/master/ROUTINES/ASM/BMITTER/BLITTER.png" width="200" height="100"/><br>
+<img src="https://github.com/NoExtra-Team/Samples/blob/master/ROUTINES/ASM/BLITTER/BLITTER.png" width="200" height="100"/><br>
 ## CLEAR1PB.ASM
 Perform an erase part of the screen according with bitplanes selected
 
