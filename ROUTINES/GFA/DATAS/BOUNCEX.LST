@@ -1,0 +1,34 @@
+REM - Listing : BOUNCEX.LST
+REM - Coded by Atomus/NoExtra
+REM - Create a bounce effet
+REM - Curve plotted in real time
+REM - Save the curve generated
+'
+RESERVE 5000
+CLS
+'
+lon%=1284
+buf$=SPACE$(lon%)
+buf%=V:buf$
+ptr%=buf%
+'
+FOR a=0 TO 360*4
+  x=160+30+250/2*SINQ(a)*COSQ(c)
+  y=100-4+190/2*COSQ(b)*SINQ(d)
+  ADD a,0.12
+  ADD b,0.5
+  ADD c,0.7
+  ADD d,0.32345
+  PLOT x,y
+  '
+  dif&=INT(-x)
+  BMOVE V:dif&,ptr%,2
+  ADD ptr%,2
+  BMOVE V:dif&,ptr%,2
+  ADD ptr%,2
+NEXT a
+'
+BSAVE "\BOUNCEX.DAT",buf%,lon%
+'
+EDIT
+'

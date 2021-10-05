@@ -1,0 +1,48 @@
+REM - Listing : BOUNCEY.LST
+REM - Coded by Atomus/NoExtra
+REM - Create a bounce effet
+REM - Curve plotted in real time
+REM - Save the curve generated
+'
+RESERVE 5000
+CLS
+'
+lon%=1284
+buf$=SPACE$(lon%)
+buf%=V:buf$
+ptr%=buf%
+'
+x=0
+y=0
+v=7                             ! vitesse du solide + ou -
+a=0.8                           ! acceleration (ce qu'on additione
+'                               ! a chaque VBL)
+p=1                             ! la perte au contact du sol
+'
+bas&=200
+DO
+  VSYNC
+  '
+  x=x+1
+  v=v+a
+  y=y+v
+  PLOT x,y
+  IF y>bas&
+    y=bas&-(y-bas&)             ! si c'est superieur a 250
+    v=v-p                       ! on enleve la perte
+    v=-v                        ! on inverse la vitesse
+  ENDIF
+  dif&=-y
+  REM ' dif&=CINT(dif&*168)
+  PRINT AT(1,1);dif&
+  BMOVE V:dif&,ptr%,2
+  ADD ptr%,2
+  BMOVE V:dif&,ptr%,2
+  ADD ptr%,2
+  EXIT IF MOUSEK OR x>320
+LOOP
+'
+BSAVE "\BOUNCEY.DAT",buf%,lon%
+'
+EDIT
+'
