@@ -1,6 +1,6 @@
 # Tricks or routs for Atari ST coding
 
-<img src="https://github.com/NoExtra-Team/Samples/blob/master/ROUTINES/ASM/LINE-A/LINE-A.png" width="200" height="100"/><br>
+<img src="https://raw.githubusercontent.com/NoExtra-Team/Samples/main/ROUTINES/ASM/LINE-A/LINE-A.png" width="200" height="100"/><br>
 ## COPYBLIT.ASM
 Perform a BIT BLock Transfer with a sprite graphic
 
