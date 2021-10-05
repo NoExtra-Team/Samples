@@ -24,7 +24,7 @@ Play music under one of seven VBL as $4D2
 
 <img src="https://raw.githubusercontent.com/NoExtra-Team/Samples/main/MUSIC/MYM_V161/SOURCE/ASM/NewDepack.png" width="200" height="100"/><br>
 ## PLAY_ICE.S (new routine!)
-Decompact routine to Play music under Interruptions
+Decompact ICE routine include to Play music under Interruptions
 
 ### Nota
 Use DEVPAC v2.0 to compile assembler code 
