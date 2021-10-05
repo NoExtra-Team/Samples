@@ -9,7 +9,7 @@ Play sndh music with Timer C<br>
 - add sentence to quit program<br>
 - add comments<br>
 
-<img src="https://github.com/NoExtra-Team/Samples/main/MUSIC/MYM_V161/SOURCE/GFA/PLAYER.ASM/GWEMSNDH.png" width="200" height="100"/><br>
+<img src="https://raw.githubusercontent.com/NoExtra-Team/Samples/main/MUSIC/MYM_V161/SOURCE/GFA/PLAYER.ASM/GWEMSNDH.png" width="200" height="100"/><br>
 ## GWEMSNDH.S
 SNDH Replayer under interrupts with TIMER C<br>
 - add compilation options<br>
@@ -18,7 +18,7 @@ SNDH Replayer under interrupts with TIMER C<br>
 - add number of the musdic<br>
 - add comments<br>
 
-<img src="https://github.com/NoExtra-Team/Samples/main/MUSIC/MYM_V161/SOURCE/GFA/PLAY_VBL.png" width="200" height="100"/><br>
+<img src="https://raw.githubusercontent.com/NoExtra-Team/Samples/main/MUSIC/MYM_V161/SOURCE/GFA/PLAY_VBL.png" width="200" height="100"/><br>
 ## PLAY_VBL.LST
 SNDH Replayer under interrupts with Vbl $4D2.w<br>
 - load a SNDH file<br>
