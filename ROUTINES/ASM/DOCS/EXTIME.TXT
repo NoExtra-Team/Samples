@@ -1,0 +1,477 @@
+                           INSTRUCTION EXECUTION TIMES
+
+D.1 INTRODUCTION
+
+This  Appendix contains listings of the instruction execution times in terms  of
+external clock (CLK) periods.  In this data, it is assumed that both memory read
+and write cycle times are four clock periods.  A longer memory cycle will  cause
+the generation of wait states which must be added to the total instruction time.
+
+The  number of bus read and write cycles for each instruction is  also  included
+with the timing data. This data is enclosed in parantheisis following the number
+of clock periods and is shown as:(r/w) where r is the number of read cycles  and
+w is the number of write cycles included in the clock period  number.  Recalling
+that either a read or write cycle requires four clock periods,  a timing  number
+as 18(3/1) relates to 12 clock periods for the three read cycles,  plus 4  clock
+periods  for  the  one write cycle,  plus 2 cycles required  for  some  internal
+functions of the processor.
+
+                                     NOTE
+
+The  number  of periods includes instruction fetch and  all  applicable  operand
+fetches and stores.
+
+D.2 EFFECTIVE ADDRESS OPERAND CALCULATION TIMING
+
+Table  D-1  lists  the number of clock periods required  to  compute  an
+instruction's effective address.  It includes fetching of any  extension
+words,  the address computation, and fetching of the memory operand. The
+number of bus read and write cycles is shown in parenthesis (r/w).  Note
+there are no write cycles involved in processing the effective address.
+
+Table D-1. Effective Address Calculation Timing
+
++-----------------------------------------------------------+---------+--------+
+|              Addressing Mode                              |Byte/Word|  Long  |
++------------+----------------------------------------------+---------+--------+
+|            |                    Register                  |         |        |
+| Dn         | Data Register Direct                         |  0(0/0) | 0(0/0) |
+| An         | Address Register Direct                      |  0(0/0) | 0(0/0) |
++------------+----------------------------------------------+---------+--------+
+|            |                    Memory                    |         |        |
+| An@        | Address Register Indirect                    |  4(1/0) | 8(2/0) |
+| An@+       | Address Register Indirect with Postincrement |  4(1/0) | 8(2/0) |
++------------+----------------------------------------------+------------------+
+| An@-       | Address Register Indirect with Predecrement  |  6(1/0) |10(2/0) |
+| An@(d)     | Address Register Indirect with Displacement  |  8(2/0) |12(3/0) |
++------------+----------------------------------------------+------------------+
+| An@(d,ix)* | Address Register Indirect with Index         | 10(2/0) |14(3/0) |
+| xxx.W      | Absolute Short                               |  8(2/0) |12(3/0) |
++------------+----------------------------------------------+------------------+
+| xxx.L      | Absolute Long                                | 12(3/0) |16(4/0) |
+| PC@(d)     | Programm Counter with Displacement           |  8(2/0) |12(3/0) |
++------------+----------------------------------------------+------------------+
+| PC@(d,ix)* | Programm Counter with Index                  | 10(2/0) |14(3/0) |
+| #xxx       | Immediate                                    |  4(1/0) | 8(2/0) |
++------------+----------------------------------------------+------------------+
+* The size of the index register (ix) does nor affect execution time
+D.3 MOVE INSTRUCTION CLOCK PERIODS
+
+Tables  D-2 and D-3 indicate the number of clock periods for the  move  instruc-
+tion.  This data includes instruction fetch,  operand reads, and operand writes.
+The number of bus read and write cycles is shown in parenthesis as:(r/w).
+
+TABLE D-2. Move Byte and Word Instruction Clock Periods
+
+            Dn      An     An@     An@+   An@-   An@(d) An@(d,ix) xxx.W   xxx.L
+Dn        4(1/0)  4(1/0)  8(1/1)  8(1/1)  8(1/1) 12(2/1) 14(2/1) 12(2/1) 16(3/1)
+An        4(1/0)  4(1/0)  8(1/1)  8(1/1)  8(1/1) 12(2/1) 14(2/1) 12(2/1) 16(3/1)
+An@       8(2/0)  8(2/0) 12(2/1) 12(2/1) 12/2/1) 16(3/1) 18(3/1) 16(3/1) 20(4/1)
+An@+      8(2/0)  8(2/0) 12(2/1) 12(2/1) 12(2/1) 16(3/1) 18(3/1) 16(3/1) 20(4/1)
+An@-     10(2/0) 10(2/0) 14(2/1) 14(2/1) 14(2/1) 18(3/1) 20(3/1) 18(3/1) 22(4/1)
+An@(d)   12(3/0) 12(3/0) 16(3/1) 16(3/1) 16(3/1) 20(4/1) 22(4/1) 20(4/1) 24(5/1)
+An@(d,ix)14(3/0) 14(3/0) 18(3/1) 18(3/1) 18(3/1) 22(4/1) 24(4/1) 22(4/1) 26(5/1)
+xxx.W    12(3/0) 12(3/0) 16(3/1) 16(3/1) 16(3/1) 20(4/1) 22(4/1) 20(4/1) 24(5/1)
+xxx.L    16(4/0) 16(4/0) 20(4/1) 20(4/1) 20(4/1) 24(5/1) 26(5/1) 24(5/1) 28(6/1)
+PC@(d)   12(3/0) 12(3/0) 16(3/1) 16(3/1) 16(3/1) 20(4/1) 22(4/1) 20(4/1) 24(5/1)
+PC@(d,ix)14(3/0) 14(3/0) 18(3/1) 18(3/1) 18(3/1) 22(4/1) 24(4/1) 22(4/1) 26(5/1)
+#xxx      8(2/0)  8(2/0) 12(2/1) 12(2/1) 12(2/1) 16(3/1) 18(3/1) 16(3/1) 20(4/1)
+* The size of the index register does not affect execution time
+
+
+TABLE D-2. Move Long Instruction Clock Periods
+
+            Dn      An     An@     An@+   An@-   An@(d) An@(d,ix) xxx.W   xxx.L
+Dn        4(1/0)  4(1/0) 12(1/2) 12(1/2) 14(1/2) 16(2/2) 18(2/2) 16(2/2) 20(3/2)
+An        4(1/0)  4(1/0) 12(1/2) 12(1/2) 14(1/2) 16(2/2) 18(2/2) 16(2/2) 20(3/1)
+An@      12(3/0) 12(3/0) 20(3/2) 20(3/2) 20/3/2) 24(4/2) 26(4/2) 24(4/2) 28(5/2)
+An@+     12(3/0) 12(3/0) 20(3/2) 20(3/2) 20(3/2) 24(4/2) 26(4/2) 24(4/2) 28(5/2)
+An@-     14(3/0) 14(3/0) 22(3/2) 22(3/2) 22(3/2) 26(4/2) 28(4/2) 26(4/2) 30(5/2)
+An@(d)   16(4/0) 16(4/0) 24(4/2) 24(4/2) 24(4/2) 28(5/2) 30(5/2) 28(5/2) 32(6/2)
+An@(d,ix)18(4/0) 18(4/0) 26(4/2) 26(4/2) 26(4/2) 30(5/2) 32(5/2) 30(5/2) 34(6/2)
+xxx.W    16(4/0) 16(4/0) 24(4/2) 24(4/2) 24(4/2) 28(5/2) 30(5/2) 28(5/2) 32(6/2)
+xxx.L    20(5/0) 20(5/0) 28(5/2) 28(5/2) 28(5/2) 32(6/2) 34(6/2) 32(6/2) 36(7/2)
+PC@(d)   16(4/0) 16(4/0) 24(4/2) 24(4/2) 24(4/2) 28(5/2) 30(5/2) 28(5/2) 32(6/2)
+PC@(d,ix)18(4/0) 18(4/0) 26(4/2) 26(4/2) 26(4/2) 30(5/2) 32(5/2) 30(5/2) 34(6/2)
+#xxx     12(3/0) 12(3/0) 20(3/2) 20(3/2) 20(3/2) 24(4/2) 26(4/2) 24(4/2) 28(5/2)
+* The size of the index register does not affect execution time
+D.4 STANDARD INSTRUCTION CLOCK PERIODS
+
+The  number of clock periods shown in Table D-4 indicates the time requiured  to
+perform the operations,  store the results,  and read the next instruction.  The
+number of bus read and write cycles is shown in parenthesis as:(r/w). The number
+of clock periods and the number of read and write cycles must be added to  those
+of the effective address calculation where indicated.
+
+In Table D-4,  the headings have the following meanings:  An = address  register
+operand,  Dn = data register operand, ea = and operand specified by an effective
+address, and M = memory effective address operand.
+
+Table D-4. Standard Instruction Clock Periods
+
++-------------+-----------+------------+------------+-----------+
+| Instruction |   Size    | op <ea>,An | op <ea>,Dn | op Dn,<M> |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |  8(1/0)+   |  4(1/0)+   |  8(1/1)+  |
+| ADD         +-----------+------------+------------+-----------+
+|             |   Long    |  6(1/0)+** |  6(1/0)+** | 12(1/2)+  |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |     -      |  4(1/0)+   |  8(1/1)+  |
+| AND         +-----------+------------+------------+-----------+
+|             |   Long    |     -      |  6(1/0)+** | 12(1/2)+  |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |  6(1/0)+   |  4(1/0)+   |     -     |
+| CMP         +-----------+------------+------------+-----------+
+|             |   Long    |  6(1/0)+   |  6(1/0)+   |     -     |
++-------------+-----------+------------+------------+-----------+
+| DIVS        |     -     |     -      |158(1/0)+*  |     -     |
++-------------+-----------+------------+------------+-----------+
+| DIVU        |     -     |     -      |140(1/0)+*  |     -     |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |     -      |  4(1/0)*** |  8(1/1)+  |
+| EOR         +-----------+------------+------------+-----------+
+|             |   Long    |     -      |  8(1/0)*** | 12(1/2)+  |
++-------------+-----------+------------+------------+-----------+
+| MULS        |     -     |     -      | 70(1/0)+*  |     -     |
++-------------+-----------+------------+------------+-----------+
+| MULU        |     -     |     -      | 70(1/0)+*  |     -     |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |     -      |  4(1/0)+   |  8(1/1)+  |
+| OR          +-----------+------------+------------+-----------+
+|             |   Long    |     -      |  6(1/0)+** | 12(1/1)+  |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |  8(1/0)+   |  4(1/0)+   |  8(1/1)+  |
+| SUB         +-----------+------------+------------+-----------+
+|             |   Long    |  6(1/0)+** |  6(1/0)+** | 12(1/2)+  |
++-------------+-----------+------------+------------+-----------+
+
++   add effective address calculation time
+*   indicates maximum value
+**  total of 8 clock periods for instruction if the address is register direct
+*** only available effective address mode is data register direct
+D.5 IMMEDIATE INTRUCTION CLOCK PERIODS
+
+The  number  of  clock periods shown in Table D-5 includes  the  time  to  fetch
+immediate operands,perform the operations,  store the results, and read the next
+operation.  The  number  of bus read and write cycles is  shown  in  parenthesis
+as:(r/w).  The  number of clock periods and the number of read and write  cycles
+must be added to those of the effective address calculation where indicated.
+
+In Table D-5, the headings have the following meanings: # = immediate operand An
+= address register operand, Dn = data register operand, and M = memory effective
+address operand.
+
+Table D-5. Immediate Intruction Clock Periods
+
++-------------+-----------+------------+------------+-----------+
+| Instruction |   Size    |  op #,Dn   |  op #,An   |  op #,M   |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |  8(2/0)    |     -      | 12(2/1)+  |
+| ADDI        +-----------+------------+------------+-----------+
+|             |   Long    | 16(3/0)    |     -      | 20(3/2)+  |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |  4(1/0)    |  8(1/0)*   |  8(1/1)+  |
+| ADDQ        +-----------+------------+------------+-----------+
+|             |   Long    |  8(1/0)    |  8(1/0)    | 12(1/2)+  |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |  8(2/0)    |     -      | 12(2/1)+  |
+| ANDI        +-----------+------------+------------+-----------+
+|             |   Long    | 16(3/0)    |     -      | 20(3/2)+  |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |  8(2/0)    |  8(2/0)    |  8(2/0)+  |
+| CMPI        +-----------+------------+------------+-----------+
+|             |   Long    | 14(2/0)    | 14(3/0)    | 12(3/0)+  |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |  8(2/0)    |     -      | 12(2/1)+  |
+| EORI        +-----------+------------+------------+-----------+
+|             |   Long    | 16(3/0)    |     -      | 20(3/2)+  |
++-------------+-----------+------------+------------+-----------+
+| MOVEQ       |   Long    |  4(1/0)    |     -      |     -     |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |  8(2/0)    |     -      | 12(2/1)+  |
+| ORI         +-----------+------------+------------+-----------+
+|             |   Long    | 16(3/0)    |     -      | 20(3/2)+  |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |  8(2/0)    |     -      | 12(2/1)+  |
+| SUBI        +-----------+------------+------------+-----------+
+|             |   Long    | 16(3/0)    |     -      | 20(3/2)+  |
++-------------+-----------+------------+------------+-----------+
+|             | Byte,Word |  4(1/0)    |  8(1/0)*   |  8(1/1)+  |
+| SUBQ        +-----------+------------+------------+-----------+
+|             |   Long    |  8(1/0)    |  8(1/0)    | 12(1/2)+  |
++-------------+-----------+------------+------------+-----------+
+
++   add effective address calculation time
+*   word only
+D.6 SINGLE OPERAND INSTRUCTION CLOCK PERIODS
+
+Table  D-6  indicates  the  number  of clock  periods  for  the  single  operand
+instruction.  The  number of bus read and write cycles is shown  in  parenthesis
+as:(r/w).  The  number of clock periods and the number of read and write  cycles
+must be added to those of the effective address calculation where indicated
+
+Table D-6. Single Operand Instruction Clock Periods
+
++-------------+-----------+------------+------------+
+| Instruction |   Size    |  Register  |  Memory    |
++-------------+-----------+------------+------------+
+|             | Byte,Word |  4(1/0)    |  8(1/1)+   |
+| CLR         +-----------+------------+------------+
+|             |   Long    |  6(1/0)    | 12(1/2)+   |
++-------------+-----------+------------+------------+
+| NBCD        |   Byte    |  6(1/0)    |  8(1/1)+   |
++-------------+-----------+------------+------------+
+|             | Byte,Word |  4(1/0)    |  8(1/2)+   |
+| NEG         +-----------+------------+------------+
+|             |   Long    |  6(1/0)    | 12(1/2)+   |
++-------------+-----------+------------+------------+
+|             | Byte,Word |  4(1/0)    |  8(1/1)+   |
+| NEGX        +-----------+------------+------------+
+|             |   Long    |  6(1/0)    | 12(1/2)+   |
++-------------+-----------+------------+------------+
+|             | Byte,Word |  4(1/0)    |  8(1/1)+   |
+| NOT         +-----------+------------+------------+
+|             |   Long    |  6(1/0)    | 12(1/2)+   |
++-------------+-----------+------------+------------+
+|             | Byte,False|  4(1/0)    |  8(1/1)+   |
+| Scc         +-----------+------------+------------+
+|             | Byte,True |  6(1/0)    |  8(1/1)+   |
++-------------+-----------+------------+------------+
+| TAS         |   Byte    |  4(1/0)    | 10(1/1)+   |
++-------------+-----------+------------+------------+
+|             | Byte,Word |  4(1/0)    |  4(1/0)+   |
+| TST         +-----------+------------+------------+
+|             |   Long    |  4(1/0)    |  4(1/0)+   |
++-------------+-----------+------------+------------+
+
++   add effective address calculation time
+D.7 SHIFT AND ROTATE INSTRUCTION CLOCK PERIODS
+
+Table  D-7  indicates  the  number of clock periods for  the  shift  and  rotate
+instructions.  The  number of bus read and write cycles is shown in  parenthesis
+as:(r/w).  The  number of clock periods and the number of read and write  cycles
+must be added to those of the effective address calculation where indicated
+
+Table D-7. Shift and Rotate Instruction Clock Periods
+
++-------------+-----------+------------+------------+
+| Instruction |   Size    |  Register  |  Memory    |
++-------------+-----------+------------+------------+
+|             | Byte,Word | 6+2n(1/0)  |  8(1/1)+   |
+| ASR,ASL     +-----------+------------+------------+
+|             |   Long    | 8+2n(1/0)  |     -      |
++-------------+-----------+------------+------------+
+|             | Byte,Word | 6+2n(1/0)  |  8(1/1)+   |
+| LSR,LSL     +-----------+------------+------------+
+|             |   Long    | 8+2n(1/0)  |     -      |
++-------------+-----------+------------+------------+
+|             | Byte,Word | 6+2n(1/0)  |  8(1/1)+   |
+| ROR,ROL     +-----------+------------+------------+
+|             |   Long    | 8+2n(1/0)  |     -      |
++-------------+-----------+------------+------------+
+|             | Byte,Word | 6+2n(1/0)  |  8(1/1)+   |
+| ROXR,ROXL   +-----------+------------+------------+
+|             |   Long    | 8+2n(1/0)  |     -      |
++-------------+-----------+------------+------------+
+
++   add effective address calculation time
+n   is the shift count
+D.8 BIT MANIPULATION INSTRUCTION CLOCK PERIODS
+
+Table D-8 indicates the number of clock periods for the bit manipulation
+instructions. The number of bus read and write cycles is shown in parenthesis
+as:(r/w). The number of clock periods and the number of read and write cycles
+must be added to those of the effective address calculation where indicated
+
+Table D-8. Bit Manipulation Instruction Clock Periods
+
++-------------+-----------+-------------------------+-------------------------+
+|             |           |         Dynamic         |          Static         |
+| Instruction |   Size    +------------+------------+------------+------------+
+|             |           |  Register  |   Memory   |  Register  |   Memory   |
++-------------+-----------+------------+------------+------------+------------+
+|             |   Byte    |     -      |  8(1/1)+   |     -      | 12(2/1)+   |
+| BCHG        +-----------+------------+------------+------------+------------+
+|             |   Long    |  8(1/0)*   |     -      | 12(2/0)*   |     -      |
++-------------+-----------+------------+------------+------------+------------+
+|             |   Byte    |     -      |  8(1/1)+   |     -      | 12(2/1)+   |
+| BCLR        +-----------+------------+------------+------------+------------+
+|             |   Long    | 10(1/0)*   |     -      | 14(2/0)*   |     -      |
++-------------+-----------+------------+------------+------------+------------+
+|             |   Byte    |     -      |  8(1/1)+   |     -      | 12(2/1)+   |
+| BSET        +-----------+------------+------------+------------+------------+
+|             |   Long    |  8(1/0)*   |     -      | 12(2/0)    |     -      |
++-------------+-----------+------------+------------+------------+------------+
+|             |   Byte    |     -      |  8(1/1)+   |     -      | 12(2/1)+   |
+| BTST        +-----------+------------+------------+------------+------------+
+|             |   Long    |  6(1/0)*   |     -      | 10(2/0)    |     -      |
++-------------+-----------+------------+------------+------------+------------+
++   add effective address calculation time
+*   indicates maximum value
+D.9 CONDITIONAL INSTRUCTION CLOCK PERIODS
+
+Table  D-9  indicates the number of clock periods for the  conditional  instruc-
+tions. The number of bus read and write cycles is shown in parenthesis as:(r/w).
+The  number  of clock periods and the number of read and write  cycles  must  be
+added to those of the effective address calculation where indicated.
+
+Table D-9. Conditional Instruction Clock Periods
+
++-------------+------------+-------------------------+-------------------------+
+|             |            |      Trap or Branch     |      Trap or Branch     |
+| Instruction |Displacement|                         |                         |
+|             |            |          Taken          |        not Taken        |
++-------------+------------+-------------------------+-------------------------+
+|             |   Byte     |        10(2/0)          |         8(1/0)          |
+| Bcc         +------------+-------------------------+-------------------------+
+|             |   Word     |        10(2/0)          |        12(2/0)          |
++-------------+------------+-------------------------+-------------------------+
+|             |   Byte     |        10(2/0)          |            -            |
+| BRA         +------------+-------------------------+-------------------------+
+|             |   Word     |        10(2/0)          |            -            |
++-------------+------------+-------------------------+-------------------------+
+|             |   Byte     |        18(2/2)          |            -            |
+| BSR         +------------+-------------------------+-------------------------+
+|             |   Word     |        18(2/2)          |            -            |
++-------------+------------+-------------------------+-------------------------+
+|             |  cc true   |            -            |        12(2/0)          |
+| DBcc        +------------+-------------------------+-------------------------+
+|             |  cc false  |        10(2/0)          |        14(3/0)          |
++-------------+------------+-------------------------+-------------------------+
+| CHK         |     -      |        40(5/3)+*        |         8(1/0)          |
++-------------+------------+-------------------------+-------------------------+
+| TRAP        |     -      |        34(4/3)          |            -            |
++-------------+------------+-------------------------+-------------------------+
+| TRAPV       |     -      |        34(5/3)          |         4(1/0)          |
++-------------+------------+-------------------------+-------------------------+
+
++   add effective address calculation time
+*   indicates maximum value
+D.10 JMP, JSR, LEA, PEA, MOVEM INTRUCTION CLOCK PERIODS
+
+Table D-10 indicates the number of clock periods required for the jump,  jump to
+subroutine,  load effective address,  push effective address,  and move multiple
+register  instructions.  The  number of bus read and write cycles  is  showm  in
+parenthesis as:(r/w).
+
+Table D-10. JMP, JSR, LEA, PEA, MOVEM Instruction Clock Periods
+
+Inst  Sz  An@     An@+   An@-   An@(d) An@(d,ix) xxx.W   xxx.L  PC@(d) PC@(d,ix)
+
+---------------+-------+-------+-------+-------+-------+-------+-------+--------
+JMP   -  8(2/0)|   -   |   -   |10(2/0)|14(2/0)|10(2/0)|12(3/0)|10(2/0)|14(3/0)*
+---------------+-------+-------+-------+-------+-------+-------+-------+--------
+JSR   - 16(2/2)|   -   |   -   |18(2/2)|22(2/2)|18(2/2)|20(3/2)|18(2/2)|22(3/2)*
+---------------+-------+-------+-------+-------+-------+-------+-------+--------
+LEA   -  4(1/0)|   -   |   -   | 8(2/0)|12(2/0)| 8(2/0)|12(3/0)| 8(2/0)|12(3/0)*
+---------------+-------+-------+-------+-------+-------+-------+-------+--------
+PEA   - 12(1/2)|   -   |   -   |16(2/2)|20(2/2)|16(2/2)|20(3/2)|16(2/2)|20(2/2)*
+---------------+-------+-------+-------+-------+-------+-------+-------+--------
+        12+4n  |12+4n  |   -   |16+4n  |18+4n  |16+4n  |20+4n  |16+4n  |18+4n*
+      W        |       |       |       |       |       |       |       |
+MOVEM   (3+n/0)|(3+n/0)|   -   |(4+n/0)|(4+n/0)|(4+n/0)|(5+n/0)|(4+n/0)|(4+n/0)
+      ---------+-------+-------+-------+-------+-------+-------+-------+--------
+M ->R   12+8n  |12+8n  |   -   |16+8n  |18+8n  |16+8n  |20+8n  |16+8n  |18+8n*
+      L        |       |       |       |       |       |       |       |
+        (3+2n/0|(3+2n/0|   -   |(4+2n/0|(4+2n/0|(4+2n/0|(5+2n/0|(4+2n/0|(4+2n/0)
+---------------+-------+-------+-------+-------+-------+-------+-------+--------
+         8+5n  |   -   | 8+5n  |12+5n  |14+5n  |12+5n  |16+5n  |   -   |   -
+      W        |       |       |       |       |       |       |       |
+MOVEM   (2/n)  |   -   |(2/n)  |(3/n)  |(3/n)  |(3/n)  |(4/n)  |   -   |   -
+      ---------+-------+-------+-------+-------+-------+-------+-------+--------
+R ->M    8+10n |   -   | 8+10n |12+10n |14+10n |12+10n |16+10n |   -   |   -
+      L        |       |       |       |       |       |       |       |
+        (2/2n) |   -   |(2/2n) |(3/2n) |(3/2n) |(2/2n) |(4/2n) |   -   |   -
+---------------+-------+-------+-------+-------+-------+-------+-------+--------
+
+n   is the number of registers to move
+*   the size of the index register (ix) does not affect the instruction's
+    execution time
+* The size of the index register does not affect execution time
+D.11 MULTI-PRECISION INSTRUCTION CLOCK PERIODS
+
+Table  D-11  indicates  the  number of clock  periods  for  the  multi-precision
+instructions.  the  number  of  clock periods includes the time  to  fetch  both
+operands,  perform the operations, store the results, and read the next instruc-
+tions. The number of read and write cycles is shown in parenthesis as:(r/w).
+
+In   Table  D-11,  the headings have the following  meanings:  Dn=data  register
+operand and M=memory operand.
+
++-------------+-----------+------------+------------+
+| Instruction |   Size    |  Register  |  Memory    |
++-------------+-----------+------------+------------+
+|             | Byte,Word |  4(1/0)    | 18(3/1)    |
+| ADDX        +-----------+------------+------------+
+|             |   Long    |  8(1/0)    | 30(5/2)    |
++-------------+-----------+------------+------------+
+|             | Byte,Word |     -      | 12(3/0)    |
+| CMPM        +-----------+------------+------------+
+|             |   Long    |     -      | 20(5/0)    |
++-------------+-----------+------------+------------+
+|             | Byte,Word |  4(1/0)    | 18(3/1)    |
+| SUBX        +-----------+------------+------------+
+|             |   Long    |  8(1/0)    | 30(5/3)    |
++-------------+-----------+------------+------------+
+| ABCD        |   Byte    |  6(1/0)    | 18(3/1)    |
++-------------+-----------+------------+------------+
+| SBCD        |   Byte    |  6(1/0)    | 18(3/1)    |
++-------------+-----------+------------+------------+
+
+D.12 MISCELLANEOUS INSTRUCTION CLOCK PERIODS
+
+Tables D-12 and D-13 indicate the number of clock periods for the  miscellaneous
+instructions  listed.  The  number  of bus read and write  cycles  is  shown  in
+parenthesis  as:(r/w).  The number of clock periods and the number of  read  and
+write  cycles must be added to those of the effective address calculation  where
+indicated.
+
++--------------+----------+----------+---+--------------+----------+----------+
+| Instruction  | Register |  Memory  |   | Instruction  | Register |  Memory  |
++--------------+----------+----------+   +--------------+----------+----------+
+| ANDI to CCR  | 20(3/0)  |     -    |   | MOVW from USP|  4(1/0)  |    -     |
+| ANDI to SR   | 20(3/0)  |     -    |   | NOP          |  4(1/0)  |    -     |
+| EORI to CCR  | 20(3/0)  |     -    |   | ORI to CCR   | 20(3/0)  |    -     |
+| EORI to SR   | 20(3/0)  |     -    |   | ORI to SR    | 20(3/0)  |    -     |
+| EXG          |  6(1/0)  |     -    |   | RESET        |132(1/0)  |    -     |
+| EXT          |  4(1/0)  |     -    |   | RTE          | 20(5/0)  |    -     |
+| LINK         | 18(2/2)  |     -    |   | RTR          | 20(5/0)  |    -     |
+| MOVE to CCR  | 12(2/0)+ | 12(2/0)+ |   | RTS          | 16(4/0)  |    -     |
+| MOVE to SR   | 12(3/0)+ | 12(2/0)+ |   | STOP         |  4(0/0)  |    -     |
+| MOVE from SR |  6(1/0)  |  8(1/1)+ |   | SWAP         |  4(1/0)  |    -     |
+| MOVE to USP  |  4(1/0)  |     -    |   | UNLK         | 12(3/0)  |    -     |
++--------------+----------+----------+---+--------------+----------+----------+
+
++   add effective address calculation time
+
++--------------+------+--------------------+--------------------+
+| Instruction  | Size | Register -> Memory | Memory -> Register |
++--------------+------+--------------------+--------------------+
+|    MOVEP     | Word |      16(2/2)       |       16(4/0)      |
+|              | Byte |      24(2/4)       |       24(6/0)      |
++--------------+------+--------------------+--------------------+
+D.13 EXCEPTION PROCESSING CLOCK PERIODS
+
+Table D-14 indicates the number of clock periods for exception  processing.  The
+number of clock periods included the time for all stacking,  vector  fetch,  and
+the  fetch of the first instruction of the handler routine.  The number  of  bus
+read and write cycles is shown in parenthesis as:(r/w).
+
+Table D-14. Exception Processing Clock Periods
+
++-----------------------------------+---------+
+| Address error                     | 50(4/7) |
++-----------------------------------+---------+
+| Bus error                         | 50(4/7) |
++-----------------------------------+---------+
+| Interrupt                         | 44(5/3)*|
++-----------------------------------+---------+
+| Illegal Instruction               | 34(4/3) |
++-----------------------------------+---------+
+| Priviledged Instruction           | 34(4/3) |
++-----------------------------------+---------+
+| Trace                             | 34(4/3) |
++-----------------------------------+---------+
+
+* the interrupt acknowledge bus cycle is assumed to take four external
+  clock periods
