@@ -25,11 +25,16 @@ Launch_Blitter:
 DoTest_STE:
 	move.l	$5a0,a0             ; test STE hardware
 	cmp.l	#$0,a0
-	beq	.no_STE                 ; Pas de cookie_jar donc un vieux ST
+	beq.s	no_STE                ; Pas de cookie_jar donc un vieux ST
 	move.l	$14(a0),d0
 	cmp.l	#$0,d0                ; _MCH=0 alors c' est un ST-STf.
-	beq	.no_STE
+	beq.s	no_STE
 ; then it's ok !
+	rts
+
+no_STE:
+	move.l	#noSTE,message
+	bsr	display_message
 	rts
 
 DoTest_Blitter:
@@ -38,15 +43,12 @@ DoTest_Blitter:
 	trap	#14
 	addq	#4,a7
 	btst	#1,d0                 ; check blitter exists
-	beq	.no_BLiTTER             ; if not straight out
+	beq	no_BLiTTER             ; if not straight out
 ; then it's ok !
 	rts
 
-.no_STE:
-	move.l	#no_STE,message
-	bsr	display_message
-.no_BLiTTER:
-	move.l	#no_BLiTTER,message
+no_BLiTTER:
+	move.l	#noBLiTTER,message
 	bsr	display_message
 	rts
 
@@ -62,3 +64,7 @@ noSTE:
 noBLiTTER:
 	dc.b	'No Blitter.',10,13,10,13
 	even
+
+message:
+	ds.l	1
+
