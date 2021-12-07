@@ -46,6 +46,16 @@ Begin:
 	move.w	#SIZE_OF_SCREEN,d1       ; size or length of memory block
 	jsr	rcopy_block_blit             ; recopy 32k of memory to screen in 4 bitplanes
 
+	* more faster operations here :)
+	move.l	logic(pc),a0             ; screen destination
+	move.w	#SIZE_OF_SCREEN,d0       ; size or length of memory block
+	jsr	clear_block_blit_full        ; Fill à screen - part of memory - with "0"
+
+	move.l	#picture,a0              ; image source
+	move.l	logic(pc),a1             ; screen destination
+	move.w	#SIZE_OF_SCREEN,d0       ; memory block size or length
+	jsr	rcopy_block_blit_full        ; recopy a block of memory to screen
+
 ;------------------------------------------------------------------<
 
 	move.w   #7,-(sp)                ; wait for a key press
